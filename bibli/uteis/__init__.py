@@ -18,21 +18,26 @@ def metade(preco):
     return res
 
 
-def moeda(tipo='R$'):  # Analisar e melhorar essa função!!
+def moeda(n= '0', tipo='R$'):
     """
     -> formata um valor no padrão monetário definido
     no tipo, se tipo não for definido retorna no padrão
     monetário brasileiro -> "R$"
+    :param n: valor a ser formatado
     :param tipo: formato monetário a ser usado
     :return: valor formatado
     """
-    # Reformular para receber 2 parametros: 'n' e 'tipo', caso não seja informado o parametro 'n', perguntar qual o valor a ser formatado.
     while True:
         try:
-            num = str(input('Digite o valor: ')).replace(',', '.')
+            if n == '0':
+                num = str(input('Digite o valor: ')).replace(',', '.')
+            else:
+                num = str(n).replace(',','.')
             num = float(num)
         except (ValueError, TypeError):
             print(f'\033[1;31mERRO: O valor \"{num}\" não é válido! Tente outra vez.\033[m')
+            if n != '0':
+                n = '0'
             continue
         except (KeyboardInterrupt, EOFError):
             print(
