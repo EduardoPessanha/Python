@@ -1,5 +1,5 @@
+from bibli.arquivo import criaArq
 from bibli.uteis import moeda
-from bibli.Ajuda import pyhelp
 from bibli.cor import corletra
 from bibli.interface import texto
 from bibli.numero import leiafloat, leiaint
@@ -11,5 +11,8 @@ leiafloat('Digite um número Real: ')
 print()
 texto('Isto é um Teste')
 print()
+print(corletra('vd'))
 texto('Este é um novo teste', simb='*')
+print(corletra())
 print(moeda())
+# criaArq('teste')

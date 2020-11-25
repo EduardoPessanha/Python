@@ -1,23 +1,3 @@
-def aumentar(preco, taxa):
-    res = preco + (preco * taxa / 100)
-    return res
-
-
-def diminuir(preco, taxa):
-    res = preco - (taxa * preco / 100)
-    return res
-
-
-def dobro(preco):
-    res = preco * 2
-    return res
-
-
-def metade(preco):
-    res = preco / 2
-    return res
-
-
 def moeda(n= '0', tipo='R$'):
     """
     -> formata um valor no padrão monetário definido
