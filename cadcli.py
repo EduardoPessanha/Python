@@ -1,4 +1,5 @@
 from bibli.interface import menu
+
 # import bibli.interface as bib
 
 opc = ['1- Ver clientes cadastrados',
