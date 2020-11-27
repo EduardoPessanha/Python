@@ -62,5 +62,4 @@ def calcohm(op=''):
         v = leiafloat('Valor da tensão em Volts:')
         r = v / i
         res = f'O valor da resistência é {v:.2f} Ohms'
-    print('Erro desconhecido')
     return res
