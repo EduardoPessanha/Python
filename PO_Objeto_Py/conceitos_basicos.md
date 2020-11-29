@@ -28,6 +28,7 @@
   entidado do mundo real em formas de idéias.
 - Entidades abstraídas podem se comunicar entre si, por meio de
   troca de Mensagens.
+  
   De acordo como o autor Correia (2006):
   
     _**"Pelo princípio da abstração, isolamos os objetos que
