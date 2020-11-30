@@ -29,3 +29,19 @@ def moeda(n= '0', tipo='R$'):
                 return f"{tipo} {num}"
             else:
                 return f'{tipo} {num:.2f}'
+
+
+def mega():
+    from random import randint
+    sorteio = list()
+    contador = 0
+    while True:
+        num = randint(1, 60)
+        if num not in sorteio:
+            sorteio.append(num)
+            contador += 1
+        if contador >= 6:
+            break
+    sorteio = sorted(sorteio)
+    # sorteio.sort()
+    return sorteio
