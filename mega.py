@@ -4,7 +4,7 @@ from bibli.numero import leiaint, corletra
 from bibli.uteis import mega
 from time import sleep
 
-print(corletra('az'))5
+print(corletra('az'))
 texto('Palpites para a Mega Sena', simb='=')
 print(corletra())
 

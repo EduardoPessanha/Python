@@ -39,9 +39,9 @@ def menu(lista='', titulo='menu principal', op=' '):
 
 
 def cab(txt='', simb='=', tam=40):
-    print(linha(simb))
+    print(linha(simb, tam))
     print(txt.upper().center(tam))
-    print(linha(simb))
+    print(linha(simb, tam))
     return
 
 
