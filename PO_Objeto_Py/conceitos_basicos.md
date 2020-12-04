@@ -108,3 +108,7 @@
 
 ![ClasseCaneta02](https://user-images.githubusercontent.com/68357896/101171820-15a5b700-361f-11eb-926d-cea36e70b9ff.png)
 
+  - Classe -> Define os atributos e métodos comuns que serão 
+              compartilhados por um objeto.
+
+  - Objeto -> É a instância de uma Classe.
