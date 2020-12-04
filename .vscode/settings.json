@@ -9,6 +9,16 @@
     },
     "[python]": {
         "editor.formatOnSave": true,
-    }
+    },
+    "cSpell.words": [
+        "manuten",
+        "manutenção",
+        "modifica",
+        "modificação",
+        "o",
+        "porque",
+        "quest",
+        "questão"
+    ]
 
 }

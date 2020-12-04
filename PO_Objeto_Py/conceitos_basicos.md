@@ -2,7 +2,7 @@
 
 ## CONCEITOS BÁSICOS
 
-#### **_ORIENTAÇÃO A OBJETOS - OO_**
+### **_ORIENTAÇÃO A OBJETOS - OO_**
         
 - Programação Orientada a Objetos - POO:  método de programação que
   usa tipos de dados personalizados.
@@ -10,7 +10,7 @@
   cosntruir novos tipos de dados.
 - Baseia-se fundamentalmente no conceito de Objetos.
 
-#### **_VANTAGENS DA OO_**
+### **_VANTAGENS DA OO_**
       
   **COMERN**ada:
   
@@ -35,7 +35,7 @@
                        isto é, uma coisa que é natural é mais fácil de 
                        entender, porque se foca mais nas funcionalidades do 
                        que nos detalhes de implemetação. Não é necessário 
-                       conhecer a implementação interna de um objeto para 
+                       conhecer a implemetacao interna de um objeto para 
                        poder usá-lo.             
 
 ### **_ABSTRAÇÃO_**
@@ -46,7 +46,7 @@
   analisado, deixando de lado outros aspectos.  Representar uma 
   entidado do mundo real em formas de idéias.
 - Entidades abstraídas podem se comunicar entre si, por meio de
-  troca de Mensagens.
+  troca de mensagens.
   
   De acordo como o autor Correia (2006):
   
