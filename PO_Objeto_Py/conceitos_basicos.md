@@ -38,26 +38,6 @@
                        conhecer a implemetacao interna de um objeto para 
                        poder usá-lo.             
 
-### **_ABSTRAÇÃO_**
-
- _A orientação a objetos é baseada no conceito de abstração._
- 
-- Abstrair é selecionar apectos específicos de um problema a ser 
-  analisado, deixando de lado outros aspectos.  Representar uma 
-  entidado do mundo real em formas de idéias.
-- Entidades abstraídas podem se comunicar entre si, por meio de
-  troca de mensagens.
-  
-  De acordo como o autor Correia (2006):
-  
-    _**"Pelo princípio da abstração, isolamos os objetos que
-        queremos representar do ambiente complexo em que se 
-        situam, e nesses objetos representamos somente as 
-        características que são relevantes para o problema 
-        em questão."**_
-    
-  https://www.youtube.com/watch?v=dG7LlYne2VA
-
 ### *_OBJETO_*
 
   - Objeto: é uma coisa material ou abstrata que pode ser 
@@ -110,3 +90,24 @@
               compartilhados por um objeto.
 
   - Objeto -> É a instância de uma Classe.
+
+
+  ### **_ABSTRAÇÃO_**
+
+ _A orientação a objetos é baseada no conceito de abstração._
+ 
+- Abstrair é selecionar apectos específicos de um problema a ser 
+  analisado, deixando de lado outros aspectos.  Representar uma 
+  entidado do mundo real em formas de idéias.
+- Entidades abstraídas podem se comunicar entre si, por meio de
+  troca de mensagens.
+  
+  De acordo como o autor Correia (2006):
+  
+    _**"Pelo princípio da abstração, isolamos os objetos que
+        queremos representar do ambiente complexo em que se 
+        situam, e nesses objetos representamos somente as 
+        características que são relevantes para o problema 
+        em questão."**_
+    
+  https://www.youtube.com/watch?v=dG7LlYne2VA
