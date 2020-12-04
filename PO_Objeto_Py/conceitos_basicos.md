@@ -58,3 +58,49 @@
     
   https://www.youtube.com/watch?v=dG7LlYne2VA
 
+### **_OBJETO_*
+
+  - Objeto: é uma coisa material ou abstrata que pode ser 
+            percebida pelos sentidos e descrito por meio de 
+            suas características, comportamento e estado atual.
+
+  Todo objeto tem: ATRIBUTOS, MÉTODO E ESTADO (STATUS)
+
+  Todo objeto vem a partir de uma classe (um molde)
+
+  Classe -> é um "molde" que foi utilizado para gerar um objeto.
+
+  Para se criar um objeto é necessário que se defina antes um Classe.
+
+  Exemplo:
+
+  Classe caneta:
+
+    - Atributos:
+      - modelo -> Caractere
+      - cor -> Caractere
+      - ponta -> Real
+      - carga -> Inteiro
+      - tampada -> Lógico
+
+    - Métodos:
+      - Método rabiscar()
+          Se (tampada) então
+            Escreva("Erro")
+          senão
+            Escreva("Rabisco")
+          FimSe
+        FimMétodo
+      - Método tampar()
+          tampada = verdadeiro
+        FimMétodo
+      - Método escrever()
+        FimMétodo
+      - Método pintar()
+        FimMétodo
+
+  FimClasse
+
+![ClasseCaneta](https://user-images.githubusercontent.com/68357896/101168939-fdcc3400-361a-11eb-8ed6-acadd959c6bc.png)
+
+

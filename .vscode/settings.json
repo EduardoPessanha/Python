@@ -11,6 +11,7 @@
         "editor.formatOnSave": true,
     },
     "cSpell.words": [
+        "Documentos",
         "manuten",
         "manutenção",
         "modifica",
@@ -18,7 +19,8 @@
         "o",
         "porque",
         "quest",
-        "questão"
+        "questão",
+        "verdadeiro"
     ]
 
 }
