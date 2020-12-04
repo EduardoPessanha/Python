@@ -1,4 +1,4 @@
-def moeda(n= '0', tipo='R$'):
+def moeda(n='0', tipo='R$'):
     """
     -> formata um valor no padrão monetário definido
     no tipo, se tipo não for definido retorna no padrão
@@ -12,7 +12,7 @@ def moeda(n= '0', tipo='R$'):
             if n == '0':
                 num = str(input('Digite o valor: ')).replace(',', '.')
             else:
-                num = str(n).replace(',','.')
+                num = str(n).replace(',', '.')
             num = float(num)
         except (ValueError, TypeError):
             print(f'\033[1;31mERRO: O valor \"{num}\" não é válido! Tente outra vez.\033[m')

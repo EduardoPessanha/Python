@@ -39,6 +39,13 @@ def menu(lista='', titulo='menu principal', op=' '):
 
 
 def cab(txt='', simb='=', tam=40):
+    """
+
+    :param txt: texto a ser formatado
+    :param simb: simbolo para usar nas linhas
+    :param tam: tamanho da linha
+    :return:
+    """
     print(linha(simb, tam))
     print(txt.upper().center(tam))
     print(linha(simb, tam))

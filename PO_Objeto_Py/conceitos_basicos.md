@@ -35,7 +35,7 @@
                        isto é, uma coisa que é natural é mais fácil de 
                        entender, porque se foca mais nas funcionalidades do 
                        que nos detalhes de implemetação. Não é necessário 
-                       conhecer a implemetacao interna de um objeto para 
+                       conhecer a implemetacão interna de um objeto para 
                        poder usá-lo.             
 
 ### *_OBJETO_*

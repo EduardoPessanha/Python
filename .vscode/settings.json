@@ -1,26 +1,22 @@
 {
-    // "python.pythonPath": "virtual/bin/python",
     "python.linting.mypyEnabled": true,
+//    "python.pythonPath": "virtual/bin/python",
     "python.linting.flake8Enabled": true,
     "code-runner.runInTerminal": true,
     "code-runner.ignoreSelection": true,
     "code-runner.executorMap": {
-        "python": "virtual/bin/python3",
+        "python": "virtual/bin/python3"
     },
     "[python]": {
-        "editor.formatOnSave": true,
+        "editor.formatOnSave": true
     },
     "cSpell.words": [
         "Documentos",
-        "manuten",
         "manutenção",
         "modifica",
         "modificação",
-        "o",
         "porque",
-        "quest",
         "questão",
         "verdadeiro"
     ]
-
 }
