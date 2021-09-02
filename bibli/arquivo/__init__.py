@@ -1,7 +1,7 @@
 def testaArq(arq):
     """
     -> Verifica se existe o arquivo arq
-    :param arq: Nome do arquivo a ser testado.
+    :arq: Nome do arquivo a ser testado.
     :return: retorna True se o arquivo for encontrado,
     caso contrário False
     """
