@@ -35,7 +35,7 @@
                        isto é, uma coisa que é natural é mais fácil de 
                        entender, porque se foca mais nas funcionalidades do 
                        que nos detalhes de implemetação. Não é necessário 
-                       conhecer a implemetacao interna de um objeto para 
+                       conhecer a implemetacão interna de um objeto para 
                        poder usá-lo.             
 
 ### *_OBJETO_*
@@ -110,4 +110,4 @@
         características que são relevantes para o problema 
         em questão."**_
     
-  https://www.youtube.com/watch?v=dG7LlYne2VA
+  Clique aqui: [Bóson Treinamentos](https://www.youtube.com/watch?v=dG7LlYne2VA)

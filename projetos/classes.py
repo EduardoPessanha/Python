@@ -1,9 +1,10 @@
 # import sys
 # from types import ModuleType
 import bibli.interface as inter
-text = 'introdução ao estudo das classes e objetos'
-tam = len(text)
-inter.cab(text,'+', tam + 4)
+
+texto = 'introdução ao estudo das classes e objetos'
+tam = len(texto)
+inter.cab(texto, simb='+', tam=tam + 4)
 
 print(inter.linha('*', 10))
 

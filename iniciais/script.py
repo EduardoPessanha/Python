@@ -18,7 +18,7 @@ while True:
             tipo = ' '
             print('Você VENCEU !!!!')
         else:
-            print(('Você PERDEU !!!!'))
+            print('Você PERDEU !!!!')
             break
     elif tipo == 'I':
         if total % 2 == 1:  # Deu ÍMPAR

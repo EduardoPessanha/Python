@@ -1,8 +1,9 @@
+from time import sleep
+
 from bibli.cor import corletra
 from bibli.interface import texto
 from bibli.numero import leiaint
 from bibli.uteis import mega
-from time import sleep
 
 print(corletra('az'))
 texto('Palpites para a Mega Sena', simb='=')
