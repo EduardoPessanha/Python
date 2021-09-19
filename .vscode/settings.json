@@ -21,6 +21,9 @@
         "quest",
         "questão",
         "verdadeiro"
+    ],
+    "cSpell.ignoreWords": [
+        "pyhelp"
     ]
 
 }
