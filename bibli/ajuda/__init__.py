@@ -1,6 +1,4 @@
 from time import sleep
-
-
 def fundo(tipo=''):
     cf = {'': '\033[m',           # 0 - restaura cor padrão
           'br': '\033[1;7;30m',   # 1 - fundo branco
@@ -25,7 +23,7 @@ def cab(msg, cor=''):
 
 
 def manual(func):
-    cab(f"Acessando o manual do comando '{func}'")      # , 'az'
+    cab(f"Acessando o manual do comando '{func}'", 'az')
     sleep(1)
     print(fundo('br'))
     help(func)
@@ -35,19 +33,9 @@ def manual(func):
 
 def pyhelp():
     while True:
-        cab(' SISTEMA DE AJUDA PyHELP ')    # , 'br'
+        cab(' SISTEMA DE AJUDA PyHELP ', 'vd')
         nome = str(input('Função da biblioteca -> '))
         if nome.upper() == 'FIM':
             break
         manual(nome)
-    cab(' ATÉ LOGO!')       # , 'vm'
-
-
-def main():
-    pyhelp()
-    return
-
-
-if __name__ == '__main__':
-    print(__file__)
-    main()
+    cab(' ATÉ LOGO!', 'vm')
