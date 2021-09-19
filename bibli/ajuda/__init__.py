@@ -1,4 +1,6 @@
 from time import sleep
+
+
 def fundo(tipo=''):
     cf = {'': '\033[m',           # 0 - restaura cor padrão
           'br': '\033[1;7;30m',   # 1 - fundo branco
@@ -39,3 +41,12 @@ def pyhelp():
             break
         manual(nome)
     cab(' ATÉ LOGO!', 'vm')
+
+
+def main():
+    pyhelp()
+    return
+
+
+if __name__ == '__main__':
+    main()
