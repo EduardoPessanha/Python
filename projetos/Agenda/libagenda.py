@@ -223,8 +223,12 @@ def inserir(val: list):
                 'ATENÇÃO ERRO', 'Não foram informados os valores!')
         else:
             # > 3- Ler os dados inseridos do formulário
-            reg = "INSERT INTO tb_contatos (t_nome, t_fone, t_email, t_endereco, t_cidade, t_uf, t_obs)VALUES('"+txtnome.get()+"', '"+txtfone.get(
-            )+"', '"+txtmail.get()+"', '"+txtend.get()+"', '"+txtcid.get()+"', '"+txtuf.get()+"', '"+txtobs.get(1.0, END)+"' )"
+            reg = f"""INSERT INTO tb_contatos 
+                (t_nome, t_fone, t_email, t_endereco, t_cidade, t_uf, t_obs)
+                VALUES("{txtnome.get()}", "{txtfone.get()}", "{txtmail.get()}", 
+                "{txtend.get()}", "{txtcid.get()}", "{txtuf.get().upper()}", 
+                "{txtobs.get(1.0, END)}")
+            """
         # > 4- Inserir os dados do formulário na tabela do banco de dados e fazer o commit (atualizar o banco de dados)
             po.execute(reg)
             vcon.commit()
