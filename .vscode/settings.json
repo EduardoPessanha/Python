@@ -1,6 +1,6 @@
 {
     "python.linting.mypyEnabled": true,
-//    "python.pythonPath": "virtual/bin/python",
+    //    "python.pythonPath": "virtual/bin/python",
     "python.linting.flake8Enabled": true,
     "code-runner.runInTerminal": true,
     "code-runner.ignoreSelection": true,
@@ -20,6 +20,10 @@
         "verdadeiro"
     ],
     "cSpell.ignoreWords": [
-        "pyhelp"
+        "getx",
+        "gety",
+        "pyhelp",
+        "xdif",
+        "ydif"
     ]
 }

@@ -1,70 +1,31 @@
+```py
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
+```  
 
-"""
-    _A programação orientada a objetos (POO) é um paradigma de programação
-    _baseado no conceito de " objetos ", que podem conter dados e código:
-    _dados na forma de campos (geralmente conhecidos como atributos ou
-    _propriedades) e código, na forma de procedimentos (freqüentemente
-    _conhecido como métodos).
+## A programação orientada a objetos (**POO**) é um paradigma de programação baseado no conceito de **objetos**, que podem conter dados e código:  
 
-    _Uma característica dos objetos é que os próprios procedimentos de um
-    _objeto podem acessar e, muitas vezes, modificar os campos de dados de si
-    _mesmo (os objetos têm uma noção de this ou self) Na POO, os programas de
-    _computador são projetados a partir de objetos que interagem uns com os
-    _outros. As linguagens POO são diversas, mas as mais populares são
-    _baseadas em classes , o que significa que os objetos são instâncias de
-    _classes , que também determinam seus tipos.
+*  ## **dados** na forma de campos (geralmente conhecidos como atributos ou propriedades)
+*  ## **código**, na forma de procedimentos (freqüentemente conhecido como métodos).
+<br>  
 
-    _Na programação orientada à objetos o foco é na criação de objetos que
-    _contem tanto os dados quanto as funcionalidades.
+### Uma característica dos objetos é que os próprios procedimentos de um objeto podem acessar e, muitas vezes, modificar os campos de dados de si mesmo (os objetos têm uma noção de **this** ou **self**) Na **POO**, os programas de computador são projetados a partir de objetos que interagem uns com os outros. As linguagens **POO** são diversas, mas as mais populares são baseadas em **classes** , o que significa que os objetos são instâncias de **classes** , que também determinam seus tipos.<br><br> 
 
-    _Em Python, todo valor é na verdade um objeto. Seja uma string, uma lista,
-    _ou mesmo um inteiro, todos são objetos. Programas manipulam esses objetos
-    _realizando computações diretamente com eles ou chamando os seus métodos
-    _(ou seja, pedindo que esses objetos executem seus métodos).
-    _Para ser mais específico, nós dizemos que um objeto possui um 'estado' e
-    _uma coleção de métodos que ele pode executar. O 'estado' de um objeto
-    _representa as coisas que o objeto sabe sobre si mesmo.
-    _Por exemplo, um objeto tartaruga, possui um estado que representa a sua
-    _posição, sua cor, sua direção, etc. Cada tartaruga também tem a
-    _capacidade de se mover para a frente, para trás, ou virar para a direita
-    _ou esquerda. Cada tartaruga é diferente pois, embora sejam todas
-    _tartarugas, cada uma tem um estado diferente (como posições diferentes,
-    _ou orientações, etc)
+### Na programação orientada à objetos o foco é na criação de objetos que contem tanto os dados quanto as funcionalidades.<br><br>
 
-Começando a estudar Class .........
+### Em Python, todo valor é na verdade um objeto. Seja uma string, uma lista, ou mesmo um inteiro, todos são objetos. Programas manipulam esses objetos realizando computações diretamente com eles ou chamando os seus métodos (ou seja, pedindo que esses objetos executem seus métodos).<br><br>
+### Para ser mais específico, nós dizemos que um objeto possui um 'estado' e uma coleção de métodos que ele pode executar. O 'estado' de um objeto representa as coisas que o objeto sabe sobre si mesmo. Por exemplo, um objeto tartaruga, possui um estado que representa a sua posição, sua cor, sua direção, etc. Cada tartaruga também tem a capacidade de se mover para a frente, para trás, ou virar para a direita ou esquerda. Cada tartaruga é diferente pois, embora sejam todas tartarugas, cada uma tem um estado diferente (como posições diferentes, ou orientações, etc)<br><br>  
 
-    _As definições de classes podem aparecer em qualquer lugar em um programa,
-    _mas são geralmente perto do início (após os comandos import). As regras de
-    _sintaxe para a definição de uma classe são as mesmas de outros comandos
-    _compostos. Há um cabeçalho que começa com a palavra-chave 'class', seguido
-    _pelo nome da classe e terminando com dois pontos.
+### As definições de classes podem aparecer em qualquer lugar em um programa, mas são geralmente perto do início (após os comandos import). As regras de sintaxe para a definição de uma classe são as mesmas de outros comandos compostos. Há um cabeçalho que começa com a palavra-chave 'class', seguido pelo nome da classe e terminando com dois pontos.<br><br>
 
-"""
+### Toda classe deve ter um método com o nome especial **\__init__**. Este método de inicialização, muitas vezes referido como o '**construtor**', é chamado automaticamente sempre que uma nova instância da Classe é criada. Ela dá ao programador a oportunidade de configurar os atributos necessários dentro da nova instância, dando-lhes seus estados/valores iniciais. O parâmetro **self** (qe poderia ser qualquer outro nome, mas ninguém nunca faz!) é definido automaticamente para referenciar o objeto recém-criado que precisa ser inicializado.<br><br>
 
-# from tkinter import mainloop, messagebox, Tk
-# from tkinter.ttk import Style
-# from sqlite3 import Error, connect
-# from os import path, system
-
-# _Toda classe deve ter um método com o nome especial __init__. Este método de
-# _inicialização, muitas vezes referido como o 'construtor', é chamado
-# _automaticamente sempre que uma nova instância da Classe é criada. Ela dá ao
-# _programador a oportunidade de configurar os atributos necessários dentro da
-# _nova instância, dando-lhes seus estados/valores iniciais. O parâmetro self
-# _(qe poderia ser qualquer outro nome, mas ninguém nunca faz!) é definido
-# _automaticamente para referenciar o objeto recém-criado que precisa ser
-# _inicializado.
-
-
+```py
 class Ponto:
     """
     Criando a minha primeira Class!!!!!
-
     Classe para representar e/ou manipular coordenadas x, y
     """
-
     def __init__(self) -> None:   # *Construtor
         """
         ->Cria um novo ponto na origem
@@ -76,14 +37,14 @@ class Ponto:
 p = Ponto()  # *instancie um objeto do tipo Ponto (Instanciar=criar um objeto)
 q = Ponto()  # *e faça um segundo ponto
 
-
 print("\nNada parece ter acontecido com os pontos\n")
 print(p, 'id:', id(p), '\n')
 print(q, 'id:', id(q), '\n')
 print(p is q)
+```
+<br>
 
-"""
-Durante a inicialização dos objetos, criamos dois atributos chamados x e y
+### Durante a inicialização dos objetos, criamos dois atributos chamados x e y
 para cada um, e ambos com o valor 0.
 Podemos observar que quando executamos o programa, nada acontece.
 Felizmente este não é bem o caso. De fato, dois Pontos foram criados, cada um
@@ -101,25 +62,21 @@ classe.
 """
 Até agora o nosso construtor só pode criar pontos na posição (0,0). Para criar um ponto na posição (7, 6) é preciso fornecer alguma capacidade adicional para passar informações para o construtor. Como os construtores são simplesmente funções com nomes especiais, podemos usar parâmetros para fornecer as informações específicas.
 
-Nós podemos tornar o construtor da nossa classe mais geral, colocando parâmetros extras no método __init__.
-"""
+Nós podemos tornar o construtor da nossa classe mais geral, colocando parâmetros extras no método \__init__.<br><br>
 
-
+```py
 class Ponto:
     """
     Criando a minha primeira Class!!!!!
-
     Classe para representar e/ou manipular coordenadas x, y
     """
-
     def __init__(self, initx, inity) -> None:   # *Construtor
-
         self.initx = initx
         self.inity = inity
 
 
 p = Ponto(6, 7)
-
+```
 # _Agora quando nós criamos novos pontos, podemos simplesmente fornecer os valores de x e y como argumentos. Quando o ponto é criado, os valores de 'initX' e 'initY' são atribuidos ao 'estado' do objeto.
 
 # _Adicionando Outros Métodos à Nossa Classe:
@@ -264,7 +221,6 @@ Suponha que você tenha um objeto ponto e deseja encontrar o ponto médio entre 
 Gostaríamos de escrever um método, chamado de "caminho_médio" que recebe outro Pinto() como parâmetro e retorne o Ponto() que está a meio caminho entre o ponto e o alvo.
 """
 
-# _Instâncias e Valores de Retorno:
 
 
 

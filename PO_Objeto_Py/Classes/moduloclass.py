@@ -14,6 +14,6 @@ print(teste)
 
 print((3**2 + 4**2)**0.5)
 
-a = p1.mostrar()
+a = p1.dist_origem()
 
 print(a)
