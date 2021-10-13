@@ -7,6 +7,9 @@ Protótipo de layout de interface gráfica para cadastro de contatos
 """
 from tkinter import Button, Entry, Text, Frame, LabelFrame
 from tkinter import PanedWindow, Label, mainloop, Tk, ttk
+from util import Criadb, Conecta
+from sqlite3 import connect
+
 
 """Para verificar as fontes do sistema
 from tkinter import font, Tk
@@ -204,7 +207,46 @@ treev.grid(column=0, row=0, padx=(10, 10),
 scrollbarv.grid(row=0, column=6, sticky='ns')
 scrollbarh.grid(row=1, columnspan=6, sticky='ew')
 
-# *PanedWindow:
+# _Inserindo os registros de um banco de dados na  Treeview:
+# Criar o banco de dados:
+
+v_sql = ("""
+CREATE TABLE tb_contato(
+        ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        Nome VARCHAR(30),
+        Fone VARCHAR(14),
+        Email VARCHAR(30),
+        Endereco VARCHAR(30),
+        Cidade VARCHAR(30),
+        UF VARCHAR(2),
+        Obs VARCHAR(500)
+        );
+        """)
+vb_dados = Criadb('Cadastro')
+
+try:
+    # *- ****** Inserindo os dados na Treeview: ******
+    # * Os dados da Treeview serão os registro da tabela tb_contatos do banco de dados Agenda.db
+
+    # *- Abrindo o banco de dados:
+    v_con = vb_dados.dml(v_sql)
+    c = v_con.cursor()  # _ criar um cursor para receber a conexão
+    # * execução da consulta (query) pelo cursor:
+    c.execute('select * from tb_contato')
+    res = c.fetchall()  # _ criar uma lista contendo todos os registros da tabela tb_contatos
+    v_con.close()  # _ fechar a conexão
+except:                          # Error as err:
+    print('\nAtenção ERRO:\n')   # messagebox.showerror('ATENÇÃO ERRO', err)
+else:
+    # - Inserindo (exibir) os registros na Treeview:
+    for i in res:
+        treev.insert('', 'end', values=[i[0], i[1],
+                                        i[2], i[3], i[4], i[5], i[6], i[7]])
+
+
+
+
+# *-PanedWindow:
 pw.add(lfr_contato)
 pw.add(lfr_formulario)
 
