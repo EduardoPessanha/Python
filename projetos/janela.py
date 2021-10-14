@@ -147,6 +147,8 @@ def reset():
     limpatv(treev)
     conexao = Criadb('Cadastro')
     con = conexao.dml(v_sql)
+    if con == None:
+        return
     c = con.cursor()  # _ criar um cursor para receber a conexão
     # * execução da consulta (query) pelo cursor:
     c.execute('select * from tb_contato')
@@ -173,7 +175,6 @@ def limpatxt():
     txt_cid.delete(0, 'end')
     txt_uf.delete(0, 'end')
     txt_obs.delete(1.0, 'end')
-    # txt_nome.focus()
     treev.focus_set()
     return
 
@@ -194,8 +195,6 @@ def limpatv(arg):
 
 
 def item_selected(evento):
-    # global record
-
     for selected_item in treev.selection():
         item = treev.item(selected_item)    # dictionary
         record = item['values']             # list
@@ -209,7 +208,7 @@ def item_selected(evento):
         txt_cid.insert(0, record[5])
         txt_uf.insert(0, record[6])
         txt_obs.insert('end', record[7])
-    return          #record
+    return
 
 
 app = Tk()
