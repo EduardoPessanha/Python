@@ -6,17 +6,211 @@ Protótipo de layout de interface gráfica para cadastro de contatos
 
 """
 from tkinter import Button, Entry, Text, Frame, LabelFrame
-from tkinter import PanedWindow, Label, mainloop, Tk, ttk
-from util import Criadb, Conecta
-from sqlite3 import connect
+from tkinter import PanedWindow, Label, mainloop, Tk, ttk, messagebox
+from util import Conecta, Criadb
+from sqlite3 import Error
 
 
-"""Para verificar as fontes do sistema
-from tkinter import font, Tk
+# *Programando os comandos dos botões:
+# >Botão Inserir:
+def inserir():
+    # _1. Ler os registros digitados no formulário lfr)formulário,
+    v_nome = txt_nome.get()
+    v_fone = txt_fone.get()
+    v_mail = txt_mail.get()
+    v_end = txt_end.get()
+    v_cid = txt_cid.get()
+    v_uf = txt_uf.get()
+    v_obs = txt_obs.get(1.0, 'end')
 
-root = Tk()
-print(font.families())
-"""
+    # _2. Confirmar que  pelo menos o campo nome foi preenchido.
+    if v_nome == '':
+        messagebox.showerror(
+            'ATENÇÃO ERRO', 'Não foram informados os valores!')
+        return      # **sair da rotina
+    else:
+        # _3. Formatando os novos registros:
+        v_sql = f"""INSERT INTO tb_contato 
+                        (Nome, Fone, Email, Endereco, Cidade, UF, Obs)
+                        VALUES("{v_nome}", "{v_fone}", "{v_mail}", 
+                        "{v_end}", "{v_cid}", "{v_uf.upper()}", 
+                        "{v_obs}")
+                    """
+        # _Abrindo o banco de dados e iInserindo os novos registros:
+        conexao = Criadb('Cadastro')
+        con = conexao.dml(v_sql)
+
+        # _4. limpar os campos do formulário, fechar a conexão e atualizar a Treeview:
+        # **limpar os campos:
+        limpatxt()
+        # **Fechando o banco de dados:
+        con.close()
+        # **Atualizar a Treeview:
+        reset()
+    return
+
+
+# >Botão Pesquisar:
+def pesquisa(args):
+    """
+        Executa uma pesquisa no banco de dados por um nome e mostra na TreeView
+
+        :param inf: informa o nome da Treeview
+        :param txt: informa o nome para a pesquisa
+    """
+    v_nome = args
+    try:
+        v_nome = txt_nome1.get()
+        # _ Conulta por nome:
+        if v_nome == '':
+            messagebox.showerror(
+                'ATENÇÃO ERRO', 'Informe um nome para pesquisar')
+            return
+        else:
+            v_sql = 'SELECT * FROM tb_contato WHERE Nome LIKE "%'+v_nome+'%"'
+            # > Conectando o banco de dados:
+            con = Conecta().condb('Cadastro')
+            cursor = con.cursor()
+            cursor.execute(v_sql)
+            v_reg = cursor.fetchall()
+            # - Limpar os dados da TreeView:
+            limpatv(treev)
+            # - Inserindo os dados editados:
+            for i in v_reg:
+                reg = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]]
+                treev.insert('', 'end', values=reg)
+            # > Limpando a caixa de texto e fechando o banco de dados:
+            txt_nome1.delete(0, 'end')
+            treev.focus_set()
+            con.close()  # _ fecha a conexão
+    except Error as err:
+        messagebox.showerror('ATENÇÃO ERRO', err)
+    return
+
+
+# >Botão Excluir:
+def excluir():
+    selected_item = treev.selection()
+    if len(selected_item) == 0:     # *Não foi escolhido nenhum item
+        messagebox.showerror('ATENÇÃO ERRO', 'Selecione um ITEM da Tabela')
+        return
+    item = treev.item(selected_item)    # dictionary
+    v_ID = item['values'][0]             # list
+    try:
+        res = messagebox.askquestion(
+            'CONFIRMAR', 'O registro será EXCLUÍDO.\nDeseja continuar?')
+        if res == 'yes':
+            v_sql = f'DELETE FROM tb_contato WHERE ID = {v_ID}'
+            Criadb('Cadastro').dml(v_sql)
+            reset()
+        else:
+            reset()
+            return
+    except Error as err:
+        print(f'ATENÇÃO ERRO: {err}')
+    return
+
+
+# >Botão Editar:
+def editar():
+    selected_item = treev.selection()
+    if len(selected_item) == 0:     # *Não foi escolhido nenhum item
+        messagebox.showerror('ATENÇÃO ERRO', 'Selecione um ITEM da Tabela')
+        return
+    item = treev.item(selected_item)    # dictionary
+    v_ID = item['values'][0]             # list
+    try:
+        res = messagebox.askquestion(
+            'CONFIRMAR', 'O registro será ALTERADO.\nDeseja continuar?')
+        if res == 'yes':
+            nome = txt_nome.get()
+            fone = txt_fone.get()
+            mail = txt_mail.get()
+            end = txt_end.get()
+            cid = txt_cid.get()
+            uf = txt_uf.get()
+            obs = txt_obs.get(1.0, 'end')
+
+            v_sql = f'UPDATE tb_contato SET Nome = "{nome}", Fone = "{fone}", Email= "{mail}", Endereco= "{end}", Cidade= "{cid}", UF = "{uf}", Obs = "{obs}" WHERE ID = {v_ID}'
+            Criadb('Cadastro').dml(v_sql)
+            reset()
+        else:
+            reset()
+            return
+    except Error as err:
+        print(f'ATENÇÃO ERRO: {err}')
+    return
+
+
+# >Botão Reset
+def reset():
+    limpatv(treev)
+    conexao = Criadb('Cadastro')
+    con = conexao.dml(v_sql)
+    c = con.cursor()  # _ criar um cursor para receber a conexão
+    # * execução da consulta (query) pelo cursor:
+    c.execute('select * from tb_contato')
+    res = c.fetchall()  # _ criar uma lista contendo todos os registros da tabela tb_contatos
+    # v_con.close()  # _ fechar a conexão
+    # - Inserindo (exibir) os registros na Treeview:
+    for i in res:
+        treev.insert('', 'end', values=[i[0], i[1],
+                                        i[2], i[3], i[4], i[5], i[6], i[7]])
+    # **Fechando o banco de dados:
+    con.close()     # Fecha a conexão
+    treev.bind('<<TreeviewSelect>>', item_selected) 
+    limpatxt()
+    return
+
+
+# *Funções complementares:
+def limpatxt():
+    # **limpar os campos Entry e Text:
+    txt_nome.delete(0, 'end')
+    txt_fone.delete(0, 'end')
+    txt_mail.delete(0, 'end')
+    txt_end.delete(0, 'end')
+    txt_cid.delete(0, 'end')
+    txt_uf.delete(0, 'end')
+    txt_obs.delete(1.0, 'end')
+    # txt_nome.focus()
+    treev.focus_set()
+    return
+
+
+def limpatv(arg):
+    """
+    Função para limpar a tela da TreeView antes de mostrar os dados
+
+    :param arg: informa o nome da TreeView
+    """
+    treev = arg
+    treev.delete(*treev.get_children())
+    """
+    * OU:
+    for i in treev.get_children():
+        treev.delete(i)
+    """
+
+
+def item_selected(evento):
+    # global record
+
+    for selected_item in treev.selection():
+        item = treev.item(selected_item)    # dictionary
+        record = item['values']             # list
+        print(record)
+        limpatxt()
+        v_ID = record[0]
+        txt_nome.insert(0, record[1])
+        txt_fone.insert(0, record[2])
+        txt_mail.insert(0, record[3])
+        txt_end.insert(0, record[4])
+        txt_cid.insert(0, record[5])
+        txt_uf.insert(0, record[6])
+        txt_obs.insert('end', record[7])
+    return          #record
+
 
 app = Tk()
 app.title("Protótipo de Interface Gráfica - Cadastro")
@@ -44,8 +238,10 @@ lfr_contato = LabelFrame(app, text='CONTATOS',
                          borderwidth=1,
                          border=1,
                          font=('Ebrima', 10, 'bold'))
-lfr_formulario = LabelFrame(app, text='EDITAR CONTATOS', borderwidth=1,
-                            relief='ridge', padx=10, pady=(0), font=('Ebrima', 10, 'bold'))
+lfr_formulario = LabelFrame(app, text='EDITAR CONTATOS',
+                            borderwidth=1, relief='ridge',
+                            padx=10, pady=(0),
+                            font=('Ebrima', 10, 'bold'))
 lfr_pesquisar = LabelFrame(lfr_formulario, text='Pesquisar',
                            font=('Ebrima', 10, 'bold'),
                            relief='sunken', border=1,
@@ -93,21 +289,24 @@ txt_nome1 = Entry(lfr_pesquisar, width=19,
                   font=('Ebrima, 12'), justify='left')  # ***
 
 # -Widget botões (Button):
-btn_pesquisar = Button(fr_btn_pesquisar, text='Pesquisar', width=10, bg='#b8b1e0', height=1,
-                       font=('', '10', 'bold'), cursor='hand1', border=3, relief='raised',
-                       command='lambda: pesquisa(treev, txt_nome1)', pady=1)
+btn_pesquisar = Button(fr_btn_pesquisar, text='Pesquisar',
+                       width=10, bg='#b8b1e0', height=1,
+                       font=('', '10', 'bold'), cursor='hand1',
+                       border=3, relief='raised',
+                       command=lambda: pesquisa(txt_nome1), pady=1)
 btn_inserir = Button(fr_btn_inserir, text='Inserir', width=10, bg='#b8b1e0',
                      font=('', '10', 'bold'), cursor='hand1', border=3,
-                     relief='raised', command='lambda: inserir(reglist)')
+                     relief='raised', command=inserir)
 btn_editar = Button(fr_btn_editar, text='Alterar', width=10, bg='#b8b1e0',
                     font=('', '10', 'bold'), cursor='hand1', border=3,
-                    relief='raised', command="lambda: dml('editar'), state='disabled'")
-btn_excluir = Button(fr_btn_excluir, text='Excluir', width=10, bg='#b8b1e0',
-                     font=('', '10', 'bold'), cursor='hand1', border=3, relief='raised',
-                     command="lambda: dml('excluir'), state='disabled'")
-btn_reset = Button(fr_btn_reset, text='Atualizar', width=10, bg='#b8b1e0',
-                   font=('', '10', 'bold'), cursor='hand1', border=3, relief='raised',
-                   command='atualiza')
+                    relief='raised', command=editar)
+btn_excluir = Button(fr_btn_excluir, text='Excluir', width=10,
+                     bg='#b8b1e0',
+                     font=('', '10', 'bold'), cursor='hand1', border=3,
+                     relief='raised', command=excluir)
+btn_reset = Button(fr_btn_reset, text='Atualizar', width=10,
+                   bg='#b8b1e0', font=('', '10', 'bold'),
+                   cursor='hand1', border=3, relief='raised', command=reset)
 btn_sair = Button(fr_btn_sair, text='Sair', width=10, bg='#b8b1e0',
                   font=('', '10', 'bold'), cursor='hand1', border=3,
                   relief='raised', command=exit)
@@ -208,8 +407,7 @@ scrollbarv.grid(row=0, column=6, sticky='ns')
 scrollbarh.grid(row=1, columnspan=6, sticky='ew')
 
 # _Inserindo os registros de um banco de dados na  Treeview:
-# Criar o banco de dados:
-
+# *Criar o banco de dados, caso não exista:
 v_sql = ("""
 CREATE TABLE tb_contato(
         ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -224,29 +422,10 @@ CREATE TABLE tb_contato(
         """)
 vb_dados = Criadb('Cadastro')
 
-try:
-    # *- ****** Inserindo os dados na Treeview: ******
-    # * Os dados da Treeview serão os registro da tabela tb_contatos do banco de dados Agenda.db
+# *Inserindo os dados na Treeview:
+reset()
 
-    # *- Abrindo o banco de dados:
-    v_con = vb_dados.dml(v_sql)
-    c = v_con.cursor()  # _ criar um cursor para receber a conexão
-    # * execução da consulta (query) pelo cursor:
-    c.execute('select * from tb_contato')
-    res = c.fetchall()  # _ criar uma lista contendo todos os registros da tabela tb_contatos
-    v_con.close()  # _ fechar a conexão
-except:                          # Error as err:
-    print('\nAtenção ERRO:\n')   # messagebox.showerror('ATENÇÃO ERRO', err)
-else:
-    # - Inserindo (exibir) os registros na Treeview:
-    for i in res:
-        treev.insert('', 'end', values=[i[0], i[1],
-                                        i[2], i[3], i[4], i[5], i[6], i[7]])
-
-
-
-
-# *-PanedWindow:
+# *-Adicionando Widgets na PanedWindow:
 pw.add(lfr_contato)
 pw.add(lfr_formulario)
 

@@ -64,8 +64,8 @@ class Criadb():
 
     def __init__(self, arqdb: str) -> None:
         self.arqdb = arqdb
-        
-    def dml(self, cmdsql ):
+
+    def dml(self, cmdsql):
         try:
             # Estabelecer conexão com o banco de dados:
             conn = Conecta().condb(self.arqdb)
@@ -73,10 +73,10 @@ class Criadb():
                 cursor = conn.cursor()
                 cursor.execute(cmdsql)
                 conn.commit()
-            else:       # **Não foi estabelecida a conexão!
+            else:       # **** Não foi estabelecida a conexão! ****
                 return          # _Retorna 'None'
         except Error as err:
-            if OperationalError('table tb_contato already exists'): # A tabela já existe!
+            if OperationalError('table tb_contato already exists'):  # A tabela já existe!
                 return conn     # _Retorna a conexão.
             print(f'\nOcorreu um ERRO: {err}\n')
         return conn             # _Retorna a conexão.
@@ -102,6 +102,7 @@ def main():
     print(a)
     print(arquivo)
     print(f'\n{arquivo.arqdb}.db\n')
+
 
 if __name__ == '__main__':
     main()
