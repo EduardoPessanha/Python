@@ -1,4 +1,4 @@
-CREATE TABLE caixa(
+CREATE TABLE nome_tabela(
         ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         Data DATE,
         Tipo VARCHAR(10),

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
+from datetime import date
 import sqlite3
 from sqlite3 import connect
 from os import path
@@ -22,12 +23,7 @@ class Conecta():
             # Conectando ...
             self.conexao = connect(self.nome_banco_dados)
             self.cursor = self.conexao.cursor()
-            return None
-            # self.cursor.execute('SELECT SQLITE_VERSION()')
-            # self.data = self.cursor.fetchone()
-            # # imprimindo a versão do SQLite
-            # print(f"SQLite version: {self.data}")
-
+            return
         except sqlite3.Error:
             print('Erro ao abrir o banco de dados.')
             return
@@ -58,11 +54,14 @@ class Banco_Dados():
         """ 
         Cria a tabela do banco de dados
         """
-        # * Lendo o arquivo 'caixa_tabela.sql', que contem as instruções sql 
+        # * Lendo o arquivo 'caixa_tabela.sql', que contem as instruções sql
         # * para a criação da tabela e salvando na variável 'cmdsql':
         cmdsql = 'caixa_tabela.sql'
-        with open(cmdsql, 'rt') as f:
+        with open(cmdsql, 'rt') as f:  # > 'rt' abre o arquivo para leitura ('r'), no modo texto ('t')
             instrucao_sql = f.read()
+            instrucao_sql = instrucao_sql.replace(
+                'nome_tabela', f't_{(self.tb_nome).lower()}')
+        f.close()
         self.cmdsql = instrucao_sql
         self.dml()
 
@@ -74,15 +73,64 @@ class Banco_Dados():
             if self.b_dados.conexao:
                 self.b_dados.cursor.executescript(self.cmdsql)
                 self.b_dados.commit_bd()
-                self.b_dados.fecha_conexao()
+                # self.b_dados.fecha_conexao()
+                return
         except sqlite3.Error:
             if sqlite3.OperationalError('table tb_contato already exists'):
-                print(f'Aviso: A tabela {self.tb_nome} já existe ...')
+                print(
+                    f'Aviso: A tabela \"t_{self.tb_nome.lower()}\" já existe ...')
                 return
+
+    def inserir_registro(self, lista: list):
+        self.lista = lista
+        self.cmdsql = (
+            f"""INSERT INTO t_{self.tb_nome.lower()}
+            (Data, Tipo, Descricao, Valor, Saldo, Obs)
+            VALUES(?, ?, ?, ?, ?, ?)
+            """)
+        try:
+            if self.b_dados.conexao:
+                self.b_dados.cursor.executemany(self.cmdsql, self.lista)
+                self.b_dados.commit_bd()
+        except sqlite3.Error:
+            print('Atenção correu um ERRO....')
+            return
+
+    def listar_registro(self):
+        self.cmdsql = f'SELECT * FROM "t_{self.tb_nome}" ORDER BY Data'
+        self.reg = self.b_dados.cursor.execute(self.cmdsql)
+        print(f'{"ID":^4} {"Data":^12} {"Tipo":^8} {"Descrição":^17} {"Valor":^13} {"Saldo":^15} {"Obs":^18}')
+        print('='*95)
+        for r in self.reg:
+            print(
+                f'{r[0]:^4} {r[1]:^12} {r[2]:^8} {r[3]:<17} R${r[4]:>11.2f} R${r[5]:>11.2f} {r[6]:<26}')
+
+    def editar_registro(self):
+        ...
+
+    def atualizar_registro(self):
+        ...
+
+    def apagar_registro(self):
+        ...
 
 
 if __name__ == '__main__':
-    banco = Banco_Dados('Teste').criar_tabela()
-    # print(type(banco))
-    # print(f'banco: {banco.tb_nome}.db')
-    print(dir(Conecta))
+    banco = Banco_Dados('Teste')
+    print(f'banco: {banco.tb_nome}.db')
+    print(type(banco))
+    tabela = banco.criar_tabela()
+    print(type(tabela))
+    print(tabela)
+    print('\n\n')
+    # print(dir(Conecta))
+    # print(dir(Banco_Dados))
+
+    data = str(date.today()).replace('-', '/')
+    print(data)
+    v_reg = [(data, 'E', 'Deposito', 10000, 10000, 'Deposito inicial'),
+             (data, 'S', 'Despesa', 270.58, 10000, 'Despesas de mercado'),
+             (data, 'S', 'Despesa', 150.37, 10000, 'Outras despesas de mercado')]
+    banco.inserir_registro(v_reg)
+    banco.listar_registro()
+    banco.b_dados.fecha_conexao()
