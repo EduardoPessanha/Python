@@ -50,19 +50,22 @@ class Banco_Dados():
         self.b_dados = Conecta(nome_bd)
         self.tb_nome = nome_bd
 
-    def criar_tabela(self):
-        """ 
-        Cria a tabela do banco de dados
-        """
-        # * Lendo o arquivo 'caixa_tabela.sql', que contem as instruções sql
+    def abre_sql(self, nomesql):
+        self.cmdsql = nomesql
+        # * Lendo o arquivo '.sql', que contem as instruções sql
         # * para a criação da tabela e salvando na variável 'cmdsql':
-        cmdsql = 'caixa_tabela.sql'
-        with open(cmdsql, 'rt') as f:  # > 'rt' abre o arquivo para leitura ('r'), no modo texto ('t')
+        with open(self.cmdsql, 'rt') as f:  # > 'rt' abre o arquivo para leitura ('r'), no modo texto ('t')
             instrucao_sql = f.read()
             instrucao_sql = instrucao_sql.replace(
                 'nome_tabela', f't_{(self.tb_nome).lower()}')
         f.close()
-        self.cmdsql = instrucao_sql
+        return instrucao_sql
+
+    def criar_tabela(self):
+        """ 
+        Cria a tabela do banco de dados
+        """
+        self.cmdsql = self.abre_sql('tabela.sql')
         self.dml()
 
     def dml(self):
@@ -97,7 +100,8 @@ class Banco_Dados():
             return
 
     def listar_registro(self):
-        self.cmdsql = f'SELECT * FROM "t_{self.tb_nome}" ORDER BY Data'
+        
+        self.cmdsql = self.abre_sql('lista.sql')
         self.reg = self.b_dados.cursor.execute(self.cmdsql)
         print(f'{"ID":^4} {"Data":^12} {"Tipo":^8} {"Descrição":^17} {"Valor":^13} {"Saldo":^15} {"Obs":^18}')
         print('='*95)
@@ -117,20 +121,20 @@ class Banco_Dados():
 
 if __name__ == '__main__':
     banco = Banco_Dados('Teste')
-    print(f'banco: {banco.tb_nome}.db')
-    print(type(banco))
+    # print(f'banco: {banco.tb_nome}.db')
+    # print(type(banco))
     tabela = banco.criar_tabela()
-    print(type(tabela))
-    print(tabela)
+    # print(type(tabela))
+    # print(tabela)
     print('\n\n')
     # print(dir(Conecta))
     # print(dir(Banco_Dados))
 
     data = str(date.today()).replace('-', '/')
-    print(data)
-    v_reg = [(data, 'E', 'Deposito', 10000, 10000, 'Deposito inicial'),
-             (data, 'S', 'Despesa', 270.58, 10000, 'Despesas de mercado'),
-             (data, 'S', 'Despesa', 150.37, 10000, 'Outras despesas de mercado')]
-    banco.inserir_registro(v_reg)
+    # print(data)
+    # v_reg = [(data, 'E', 'Deposito', 10000, 10000, 'Deposito inicial'),
+    #          (data, 'S', 'Despesa', 270.58, 10000, 'Despesas de mercado'),
+    #          (data, 'S', 'Despesa', 150.37, 10000, 'Outras despesas de mercado')]
+    # banco.inserir_registro(v_reg)
     banco.listar_registro()
     banco.b_dados.fecha_conexao()
