@@ -51,6 +51,12 @@ class Banco_Dados():
         self.tb_nome = nome_bd
 
     def abre_sql(self, nomesql):
+        """
+        Abre um arquivo que contém instruções/comandos SQL
+        
+        Args: nomesql (str): nome do arquivo que contém as instruções SQL
+        Returns: str
+        """
         self.cmdsql = nomesql
         # * Lendo o arquivo '.sql', que contem as instruções sql
         # * para a criação da tabela e salvando na variável 'cmdsql':
@@ -86,11 +92,7 @@ class Banco_Dados():
 
     def inserir_registro(self, lista: list):
         self.lista = lista
-        self.cmdsql = (
-            f"""INSERT INTO t_{self.tb_nome.lower()}
-            (Data, Tipo, Descricao, Valor, Saldo, Obs)
-            VALUES(?, ?, ?, ?, ?, ?)
-            """)
+        self.cmdsql = self.abre_sql('insere.sql')
         try:
             if self.b_dados.conexao:
                 self.b_dados.cursor.executemany(self.cmdsql, self.lista)
@@ -100,8 +102,7 @@ class Banco_Dados():
             return
 
     def listar_registro(self):
-        
-        self.cmdsql = self.abre_sql('lista.sql')
+        self.cmdsql = self.abre_sql('exibe.sql')
         self.reg = self.b_dados.cursor.execute(self.cmdsql)
         print(f'{"ID":^4} {"Data":^12} {"Tipo":^8} {"Descrição":^17} {"Valor":^13} {"Saldo":^15} {"Obs":^18}')
         print('='*95)
@@ -120,7 +121,7 @@ class Banco_Dados():
 
 
 if __name__ == '__main__':
-    banco = Banco_Dados('Teste')
+    banco = Banco_Dados('Novo')
     # print(f'banco: {banco.tb_nome}.db')
     # print(type(banco))
     tabela = banco.criar_tabela()
